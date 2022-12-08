@@ -1,4 +1,0 @@
-git clone + lien
-git add *
-git commit -m "msg mazava"
-git push
