@@ -3,8 +3,6 @@ import play.Sound;
 import java.io.*;
 import java.net.*;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
@@ -27,13 +25,9 @@ import javazoom.jl.player.Player;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
-import uk.co.caprica.vlcj.binding.internal.libvlc_instance_t;
-import uk.co.caprica.vlcj.binding.lib.LibVlc;
-import uk.co.caprica.vlcj.binding.support.runtime.RuntimeUtil;
-import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
+
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
-import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-import uk.co.caprica.vlcj.player.embedded.fullscreen.windows.Win32FullScreenStrategy;
+
 
 public class Client extends JFrame{
 
@@ -73,7 +67,7 @@ public class Client extends JFrame{
         try { 
             dataInputStream = new DataInputStream(soc.getInputStream());
             dataOutputStream = new DataOutputStream(soc.getOutputStream());
-            receiveFile("C:\\Intel\\thore.mp4");
+            receiveFile("dancing.mp4");
             dataInputStream.close();
             dataInputStream.close();
         }
@@ -96,7 +90,7 @@ public class Client extends JFrame{
         fileOutputStream.close();
     }
 
-        public final static String FILE_TO_RECEIVED = "C:\\Intel\\see.mp3";  
+        
         public final static int FILE_SIZE = 107347149; 
                                                      
     public void getSongcliennt (Socket soc) throws IOException{
@@ -156,7 +150,7 @@ public class Client extends JFrame{
         p.setLayout(new BorderLayout());
         p.add(c,BorderLayout.CENTER);
         frame.add(p,BorderLayout.CENTER);
-        component.mediaPlayer().media().play("C:\\Intel\\thore.mp4");
+        component.mediaPlayer().media().play("dancing.mp4");
     
     }
 

@@ -54,7 +54,7 @@ public class Serveur {
         ///image////
         System.out.println("Accepted connection : " + s);
         OutputStream outputStream=s.getOutputStream();
-        BufferedImage image=ImageIO.read(new File("sary.jpg"));
+        BufferedImage image=ImageIO.read(new File("C:/img/sary.jpg"));
         ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
         ImageIO.write(image, "jpg",byteArrayOutputStream );
         byte[]size =ByteBuffer.allocate(4).putInt(byteArrayOutputStream.size()).array();
@@ -78,7 +78,7 @@ public class Serveur {
             dataInputStream = new DataInputStream(s.getInputStream());
             dataOutputStream = new DataOutputStream(s.getOutputStream());
       
-            sendFile("C:\\Users\\finar\\Downloads\\Video\\dancing.mp4");
+            sendFile("C:\\Users\\finar\\Videos\\film\\thor.mp4");
  
             dataInputStream.close();
             dataOutputStream.close();
