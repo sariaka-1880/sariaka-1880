@@ -13,19 +13,6 @@ Here are some ideas to get you started:
 - 📫 How to reach me: ...
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
+<<<<<< HEAD
 -->
-### Explication 
-* Compilation
-compilation serveur:java main.Main
-compilation client:java main.Main
-
-* Fonctionnement 
-
-  * le client clique sur un des boutons et il envoye au seveur ce qu'il veut recevoir c'est a dire image , video ou mp3 ;
-    Le serveur recoit la requette et renvoye le fichier desiré
-
-  * a chaque envoye de fichier il faut fermer et recompiler
-
-
-
 
