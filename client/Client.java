@@ -41,8 +41,8 @@ public class Client extends JFrame{
     Socket soc=null;
 
 
-    public void getClient(Socket soc)throws IOException, ClassNotFoundException{
-
+    public void getImgClient(Socket soc)throws IOException, ClassNotFoundException{
+        //image
         InputStream inputStream=soc.getInputStream();
         System.out.println("Reading"+System.currentTimeMillis());
         System.out.println("File is Received");
@@ -64,6 +64,7 @@ public class Client extends JFrame{
     }
 
     public void getVideoclient(Socket soc){
+        //video
         try { 
             dataInputStream = new DataInputStream(soc.getInputStream());
             dataOutputStream = new DataOutputStream(soc.getOutputStream());
@@ -93,8 +94,8 @@ public class Client extends JFrame{
         
         public final static int FILE_SIZE = 107347149; 
                                                      
-    public void getSongcliennt (Socket soc) throws IOException{
-
+    public void getSongclient (Socket soc) throws IOException{
+        //song
         try {
         
             byte [] mybytearray  = new byte [FILE_SIZE];
@@ -115,8 +116,6 @@ public class Client extends JFrame{
             while(true){
                 data.read(mybytearray,0,FILE_SIZE);
                 System.out.println("playing the song ...");
-                Thread pay=new Thread(new Sound(mybytearray));
-                pay.start();
                 play(mybytearray);
 
             } 
@@ -124,7 +123,6 @@ public class Client extends JFrame{
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-
       
     }
 
@@ -175,7 +173,7 @@ public class Client extends JFrame{
                     try {
                     
                         ObjectOutputStream objout=new ObjectOutputStream(soc.getOutputStream());
-                        objout.writeObject("image");
+                        objout.writeObject("send me image");
 
                     } catch (Exception ex) {
                     }
@@ -187,7 +185,7 @@ public class Client extends JFrame{
                     try {
                 
                         ObjectOutputStream objout=new ObjectOutputStream(soc.getOutputStream());
-                        objout.writeObject("mp3");
+                        objout.writeObject("send me mp3");
             
                     } catch (Exception ex) {
                     }
@@ -199,7 +197,7 @@ public class Client extends JFrame{
                     try {
                 
                         ObjectOutputStream objout=new ObjectOutputStream(soc.getOutputStream());
-                        objout.writeObject("video"); 
+                        objout.writeObject("send me video"); 
 
                     } catch (Exception ex) {
                     }
@@ -210,12 +208,15 @@ public class Client extends JFrame{
                 String input=(String)objinp.readObject();
                 System.out.println(input);
 
-                if(input.equals("image")){
-                    getClient(soc);
-                }if(input.equals("mp3")){
-                    getSongcliennt(soc);
-                }if(input.equals("mp4")){
+                if(input.equals("sending image")){
+                    getImgClient(soc);
+
+                }if(input.equals("sending mp3")){
+                    getSongclient(soc);
+
+                }if(input.equals("sending video")){
                     getVideoclient(soc);
+
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {

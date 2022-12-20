@@ -19,27 +19,30 @@ public class Serveur {
 
     try {
         ServerSocket serverSocket=new ServerSocket(9000);
+        System.out.println("waiting........");
+
         s = serverSocket.accept();
         System.out.println("connecté");
 
         ObjectInputStream objinp=new ObjectInputStream(s.getInputStream());
         String input=(String)objinp.readObject();
+
         System.out.println(input);
 
-        if(input.equals("image")){
+        if(input.equals("send me image")){
           ObjectOutputStream objout=new ObjectOutputStream(s.getOutputStream());
-          objout.writeObject("image");
-          this.getServeur(s);
+          objout.writeObject("sending image");
+          this.SendImgServer(s);
         }
-        if(input.equals("mp3")){
+        if(input.equals("send me mp3")){
           ObjectOutputStream objout=new ObjectOutputStream(s.getOutputStream());
-          objout.writeObject("mp3");
-          this.getSongserver(s);
+          objout.writeObject("sending mp3");
+          this.SendSongServer(s);
         }
-        if(input.equals("video")){
+        if(input.equals("send me video")){
           ObjectOutputStream objout=new ObjectOutputStream(s.getOutputStream());
-          objout.writeObject("mp4");
-          this.getVidserver(s);
+          objout.writeObject("sending video");
+          this.SendVidServer(s);
         }
 
     } catch (Exception e) {
@@ -49,7 +52,7 @@ public class Serveur {
     
   }
  
-  public void getServeur(Socket s) throws IOException, ClassNotFoundException,InterruptedException {
+  public void SendImgServer(Socket s) throws IOException, ClassNotFoundException,InterruptedException {
   
         ///image////
         System.out.println("Accepted connection : " + s);
@@ -61,19 +64,15 @@ public class Serveur {
         outputStream.write(size);
         outputStream.write(byteArrayOutputStream.toByteArray());
         outputStream.flush();
-        System.out.println("Sending image......");
-        System.out.println("Flushed"+System.currentTimeMillis());
+        System.out.println("Sending image to the client");
         Thread.sleep(120000);
-        System.out.println("Closing"+System.currentTimeMillis());
-           
-
+        
   }
 
-  public void getVidserver(Socket s){
+  public void SendVidServer(Socket s){
         
         try {
             System.out.println("Accepted connection : " + s);
-            System.out.println("Connected");
             System.out.println( "Sending the video to the Client");
             dataInputStream = new DataInputStream(s.getInputStream());
             dataOutputStream = new DataOutputStream(s.getOutputStream());
@@ -90,6 +89,7 @@ public class Serveur {
   }
 
   private static void sendFile(String path)throws Exception{
+    //video
         int bytes = 0;
         File file = new File(path);
         fis= new FileInputStream(file);
@@ -105,17 +105,17 @@ public class Serveur {
 
 public final static String FILE_TO_SEND = "C:\\socket\\good.mp3"; 
 
-  public void getSongserver(Socket s)throws IOException {
-
+  public void SendSongServer(Socket s)throws IOException {
+//song 
     while (true) {
         System.out.println("Accepted connection : " + s);
         File myFile = new File (FILE_TO_SEND);
         fis = new FileInputStream(myFile);
         byte [] mybytearray =fis.readAllBytes();
         dataOutputStream = new DataOutputStream( s.getOutputStream());
-        System.out.println("sending file");
+        System.out.println("sending song to the ");
         dataOutputStream .write(mybytearray);
-        System.out.println("Done.");  
+      
     }
   }
 
